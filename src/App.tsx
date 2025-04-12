@@ -1,5 +1,7 @@
 import React from 'react';
 import { MessageCircle, Users, BookOpen, TrendingUp, Clock, Shield, Brain } from 'lucide-react';
+import demoVideo from './assets/demo.mov';
+import logo from './assets/logo.png';
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
       {/* Hero Section */}
       <header className="gradient-bg text-white">
         <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Pocket Preceptor</h1>
+          <img src={logo} alt="Pocket Preceptor Logo" className="h-32" />
           <div className="space-x-6">
             <a href="#features" className="hover:text-teal-200">Features</a>
             <a href="#benefits" className="hover:text-teal-200">Benefits</a>
@@ -17,9 +19,9 @@ function App() {
 
         <div className="container mx-auto px-6 py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 md:pr-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Real-Time Support for Real-Life Pressure
+                Real-Time Nurse Support for Real-Life Pressure
               </h2>
               <p className="text-xl mb-8">
                 Empower your nurses with instant access to AI-powered guidance, peer support, and a thriving community. Save up to $600K annually in retention costs.
@@ -28,11 +30,14 @@ function App() {
                 Request Demo
               </button>
             </div>
-            <div className="md:w-1/2 mt-10 md:mt-0">
-              <img 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800"
-                alt="Nurses using mobile app"
-                className="rounded-lg shadow-2xl"
+            <div className="md:w-1/2 mt-10 md:mt-0 md:pl-12">
+              <video 
+                src={demoVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="rounded-lg shadow-2xl w-full"
               />
             </div>
           </div>
