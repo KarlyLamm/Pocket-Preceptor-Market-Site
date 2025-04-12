@@ -1,11 +1,68 @@
-import React from 'react';
-import { MessageCircle, Users, BookOpen, TrendingUp, Clock, Shield, Brain } from 'lucide-react';
+import React, { useState } from 'react';
+import { MessageCircle, Users, BookOpen, TrendingUp, Clock, Shield, Brain, X } from 'lucide-react';
 import demoVideo from './assets/demo.mp4';
 import logo from './assets/logo.png';
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+
+  const ContactForm = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="gradient-bg rounded-xl p-8 max-w-md w-full relative shadow-2xl">
+        <button 
+          onClick={() => setShowForm(false)}
+          className="absolute top-4 right-4 text-white hover:text-teal-200 transition-colors"
+        >
+          <X size={24} />
+        </button>
+        <div className="text-center mb-8">
+          <img src={logo} alt="Pocket Preceptor Logo" className="h-32 mx-auto mb-4" />
+          <h3 className="text-2xl font-bold text-white">Contact Us</h3>
+          <p className="text-teal-100 mt-2">We'd love to hear from you</p>
+        </div>
+        <form
+          action="https://formspree.io/f/mjkyloea"
+          method="POST"
+          className="space-y-6"
+        >
+          <div>
+            <label className="block text-white mb-2 font-medium">
+              Your email:
+              <input 
+                type="email" 
+                name="email" 
+                required
+                placeholder="Enter your email"
+                className="w-full mt-1 px-4 py-3 border border-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-white/10 backdrop-blur-sm text-white placeholder-teal-200"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="block text-white mb-2 font-medium">
+              Your message:
+              <textarea 
+                name="message" 
+                required
+                placeholder="How can we help you?"
+                rows={4}
+                className="w-full mt-1 px-4 py-3 border border-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none bg-white/10 backdrop-blur-sm text-white placeholder-teal-200"
+              ></textarea>
+            </label>
+          </div>
+          <button 
+            type="submit"
+            className="w-full bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-teal-50 transition-colors shadow-lg"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {showForm && <ContactForm />}
       {/* Hero Section */}
       <header className="gradient-bg text-white">
         <nav className="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -13,7 +70,7 @@ function App() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
             <a href="#features" className="hover:text-teal-200">Features</a>
             <a href="#benefits" className="hover:text-teal-200">Benefits</a>
-            <a href="#contact" className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</a>
+            <button onClick={() => setShowForm(true)} className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</button>
           </div>
         </nav>
 
@@ -26,7 +83,10 @@ function App() {
               <p className="text-xl mb-8">
                 Empower your nurses with instant access to AI-powered guidance, peer support, and a thriving community. Save up to $600K annually in retention costs.
               </p>
-              <button className="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-teal-50">
+              <button 
+                onClick={() => setShowForm(true)}
+                className="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-teal-50"
+              >
                 Request Demo
               </button>
             </div>
@@ -132,7 +192,10 @@ function App() {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Join leading hospitals in providing innovative support for your nursing staff. Schedule a demo to see how Pocket Preceptor can help reduce turnover and boost confidence.
           </p>
-          <button className="gradient-bg text-white px-8 py-3 rounded-lg text-lg font-semibold hover:opacity-90">
+          <button 
+            onClick={() => setShowForm(true)}
+            className="gradient-bg text-white px-8 py-3 rounded-lg text-lg font-semibold hover:opacity-90"
+          >
             Schedule Demo
           </button>
         </div>
