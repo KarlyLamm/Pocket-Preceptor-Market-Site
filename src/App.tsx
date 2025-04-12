@@ -8,9 +8,9 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <header className="gradient-bg text-white">
-        <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <img src={logo} alt="Pocket Preceptor Logo" className="h-32" />
-          <div className="space-x-6">
+        <nav className="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <img src={logo} alt="Pocket Preceptor Logo" className="h-16 sm:h-32" />
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
             <a href="#features" className="hover:text-teal-200">Features</a>
             <a href="#benefits" className="hover:text-teal-200">Benefits</a>
             <a href="#contact" className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</a>
