@@ -6,6 +6,7 @@ import logo from './assets/logo.png';
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [showSurveyModal, setShowSurveyModal] = useState(false);
+  const [modalType, setModalType] = useState<'contact' | 'demo' | 'survey'>('contact');
 
   const openSurvey = (type: 'frontline' | 'stakeholder') => {
     if (type === 'frontline') {
@@ -14,6 +15,41 @@ function App() {
       window.open('https://docs.google.com/forms/d/e/1FAIpQLSdW1PXt9E-EQNztQcqAuTHOjKaDu7Z2SrMD2VT3Gnaxp7N3-w/viewform?usp=dialog', '_blank');
     }
     setShowSurveyModal(false);
+  };
+
+  const openModal = (type: 'contact' | 'demo' | 'survey') => {
+    setModalType(type);
+    if (type === 'survey') {
+      setShowSurveyModal(true);
+    } else {
+      setShowForm(true);
+    }
+  };
+
+  const getModalTitle = () => {
+    switch (modalType) {
+      case 'contact':
+        return 'Contact Us';
+      case 'demo':
+        return 'Request Demo';
+      case 'survey':
+        return 'Select Your Role';
+      default:
+        return 'Contact Us';
+    }
+  };
+
+  const getModalSubtitle = () => {
+    switch (modalType) {
+      case 'contact':
+        return "We'd love to hear from you";
+      case 'demo':
+        return 'Schedule a demo to see how Pocket Preceptor can help your organization';
+      case 'survey':
+        return 'Choose the appropriate survey for your role';
+      default:
+        return "We'd love to hear from you";
+    }
   };
 
   const SurveyModal = () => (
@@ -27,8 +63,8 @@ function App() {
         </button>
         <div className="text-center mb-8">
           <img src={logo} alt="Pocket Preceptor Logo" className="h-32 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold text-white">Select Your Role</h3>
-          <p className="text-teal-100 mt-2">Choose the appropriate survey for your role</p>
+          <h3 className="text-2xl font-bold text-white">{getModalTitle()}</h3>
+          <p className="text-white mt-2">{getModalSubtitle()}</p>
         </div>
         <div className="space-y-4">
           <button 
@@ -59,8 +95,8 @@ function App() {
         </button>
         <div className="text-center mb-8">
           <img src={logo} alt="Pocket Preceptor Logo" className="h-32 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold text-white">Contact Us</h3>
-          <p className="text-teal-100 mt-2">We'd love to hear from you</p>
+          <h3 className="text-2xl font-bold text-white">{getModalTitle()}</h3>
+          <p className="text-white mt-2">{getModalSubtitle()}</p>
         </div>
         <form
           action="https://formspree.io/f/mjkyloea"
@@ -95,7 +131,7 @@ function App() {
             type="submit"
             className="w-full bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-teal-50 transition-colors shadow-lg"
           >
-            Send Message
+            {modalType === 'demo' ? 'Request Demo' : 'Send Message'}
           </button>
         </form>
       </div>
@@ -113,8 +149,8 @@ function App() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
             <a href="#features" className="hover:text-teal-200">Features</a>
             <a href="#benefits" className="hover:text-teal-200">Benefits</a>
-            <button onClick={() => setShowSurveyModal(true)} className="hover:text-teal-200">Survey</button>
-            <button onClick={() => setShowForm(true)} className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</button>
+            <button onClick={() => openModal('survey')} className="hover:text-teal-200">Survey</button>
+            <button onClick={() => openModal('contact')} className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</button>
           </div>
         </nav>
 
@@ -128,7 +164,7 @@ function App() {
                 Empower your nurses with instant access to AI-powered guidance, peer support, and a thriving community. Save up to $600K annually in retention costs.
               </p>
               <button 
-                onClick={() => setShowForm(true)}
+                onClick={() => openModal('demo')}
                 className="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-teal-50"
               >
                 Request Demo
@@ -237,7 +273,7 @@ function App() {
             Join leading hospitals in providing innovative support for your nursing staff. Schedule a demo to see how Pocket Preceptor can help reduce turnover and boost confidence.
           </p>
           <button 
-            onClick={() => setShowForm(true)}
+            onClick={() => openModal('demo')}
             className="gradient-bg text-white px-8 py-3 rounded-lg text-lg font-semibold hover:opacity-90"
           >
             Schedule Demo
