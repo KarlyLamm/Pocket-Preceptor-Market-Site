@@ -1,6 +1,6 @@
 import React from 'react';
 import { MessageCircle, Users, BookOpen, TrendingUp, Clock, Shield, Brain } from 'lucide-react';
-import demoVideo from './assets/demo.mov';
+import demoVideo from './assets/demo.mp4';
 import logo from './assets/logo.png';
 
 function App() {
