@@ -5,6 +5,48 @@ import logo from './assets/logo.png';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [showSurveyModal, setShowSurveyModal] = useState(false);
+
+  const openSurvey = (type: 'frontline' | 'stakeholder') => {
+    if (type === 'frontline') {
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSeLWWCYf16vz6Mly0n9oucNNzodtG-VWujK6yhox67Lqs9QTQ/viewform?usp=dialog', '_blank');
+    } else if (type === 'stakeholder') {
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSdW1PXt9E-EQNztQcqAuTHOjKaDu7Z2SrMD2VT3Gnaxp7N3-w/viewform?usp=dialog', '_blank');
+    }
+    setShowSurveyModal(false);
+  };
+
+  const SurveyModal = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="gradient-bg rounded-xl p-8 max-w-md w-full relative shadow-2xl">
+        <button 
+          onClick={() => setShowSurveyModal(false)}
+          className="absolute top-4 right-4 text-white hover:text-teal-200 transition-colors"
+        >
+          <X size={24} />
+        </button>
+        <div className="text-center mb-8">
+          <img src={logo} alt="Pocket Preceptor Logo" className="h-32 mx-auto mb-4" />
+          <h3 className="text-2xl font-bold text-white">Select Your Role</h3>
+          <p className="text-teal-100 mt-2">Choose the appropriate survey for your role</p>
+        </div>
+        <div className="space-y-4">
+          <button 
+            onClick={() => openSurvey('frontline')}
+            className="w-full bg-white text-primary px-6 py-4 rounded-lg font-semibold hover:bg-teal-50 transition-colors shadow-lg text-lg"
+          >
+            Frontline Worker
+          </button>
+          <button 
+            onClick={() => openSurvey('stakeholder')}
+            className="w-full bg-white text-primary px-6 py-4 rounded-lg font-semibold hover:bg-teal-50 transition-colors shadow-lg text-lg"
+          >
+            Stakeholder
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   const ContactForm = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -63,6 +105,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       {showForm && <ContactForm />}
+      {showSurveyModal && <SurveyModal />}
       {/* Hero Section */}
       <header className="gradient-bg text-white">
         <nav className="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -70,6 +113,7 @@ function App() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
             <a href="#features" className="hover:text-teal-200">Features</a>
             <a href="#benefits" className="hover:text-teal-200">Benefits</a>
+            <button onClick={() => setShowSurveyModal(true)} className="hover:text-teal-200">Survey</button>
             <button onClick={() => setShowForm(true)} className="bg-white text-primary px-4 py-2 rounded-lg hover:bg-teal-50">Contact Sales</button>
           </div>
         </nav>
